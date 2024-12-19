@@ -46,15 +46,14 @@ TEMPLATE = u"""
                     $("<a>", {target:"_blank", href:""})
                         .text("[pop out]").prependTo($("body"));
 
+                var renderers = $.extend($.pivotUtilities.renderers,
+                                 $.pivotUtilities.c3_renderers,
+                                 $.pivotUtilities.d3_renderers,
+                                 $.pivotUtilities.export_renderers);
                 $("#output").pivotUI(
                     $.csv.toArrays($("#output").text()),
                     $.extend({
-                        renderers: $.extend(
-                            $.pivotUtilities.renderers,
-                            $.pivotUtilities.c3_renderers,
-                            $.pivotUtilities.d3_renderers,
-                            $.pivotUtilities.export_renderers
-                            ),
+                        renderers: renderers,
                         hiddenAttributes: [""]
                     }, %(kwargs)s)
                 ).show();
